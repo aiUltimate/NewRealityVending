@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Adaptive Compliance Decision",
+  "type": "object",
+  "required": [
+    "decision_id",
+    "sku_id",
+    "jurisdiction",
+    "status",
+    "rule_version",
+    "decision_date"
+  ],
+  "properties": {
+    "decision_id": {
+      "type": "string"
+    },
+    "sku_id": {
+      "type": "string"
+    },
+    "jurisdiction": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "approved",
+        "approved_with_restrictions",
+        "human_review",
+        "blocked",
+        "unknown"
+      ]
+    },
+    "rule_version": {
+      "type": "string"
+    },
+    "decision_date": {
+      "type": "string"
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviewer": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

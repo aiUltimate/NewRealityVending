@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Adaptive Product Digital Twin",
+  "type": "object",
+  "required": [
+    "sku_id",
+    "product_name",
+    "jurisdiction",
+    "status"
+  ],
+  "properties": {
+    "sku_id": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "brand": {
+      "type": "string"
+    },
+    "manufacturer": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "jurisdiction": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "approved",
+        "approved_with_restrictions",
+        "human_review",
+        "blocked",
+        "unknown"
+      ]
+    },
+    "cannabinoids": {
+      "type": "array"
+    },
+    "ingredients": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "format": {
+      "type": "string"
+    },
+    "batch_id": {
+      "type": "string"
+    },
+    "coa": {
+      "type": "object"
+    },
+    "regulatory_status": {
+      "type": "string"
+    },
+    "age_requirement": {
+      "type": "string"
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence": {
+      "type": "array"
+    },
+    "supplier": {
+      "type": "string"
+    },
+    "price": {
+      "type": "number"
+    },
+    "cost": {
+      "type": "number"
+    },
+    "last_reviewed": {
+      "type": "string"
+    },
+    "reviewer": {
+      "type": "string"
+    }
+  }
+}
