@@ -1,163 +1,78 @@
-# Adaptive Roadmap
+# New Reality Roadmap
 
 ## North Star
+Build a system capable of repeatedly creating better projects, organizations, products, and institutions.
 
-One compliant, measurable, economically validated smart retail node.
+**Project #001: Adaptive / NewRealityVending** is the first real-world laboratory.
 
-## Stage 0 — Founder Operating System
+## Phase 0 — Constitutional Foundation
+- [x] Repository foundation
+- [x] Retail architecture
+- [x] Risk/compliance doctrine
+- [x] New Reality Constitution v0.1
+- [ ] Project inheritance model
+- [ ] Governance/AI rules
+- [ ] Evidence standards
+- [ ] Transparency model
+- [ ] Community participation model
+- [ ] Amendment process
 
-**Goal:** turn the idea into an executable system.
-
-- [ ] GitHub repository
-- [ ] Legal source library
-- [ ] Product schema
-- [ ] Risk register
-- [ ] Machine requirements
-- [ ] Crowdfunding budget
-- [ ] Unit economics calculator
-- [ ] Partner map
-- [ ] Venue criteria
-- [ ] Moderator SOPs
-
-**Exit condition:** Founder can explain the entire system from law → product → machine → customer → data → economics.
-
----
-
-## Stage 1 — Software Simulation
-
-**Goal:** prove the operating model before expensive hardware.
-
+## Phase 1 — Organizational Operating System
 Build:
+- Project registry
+- Founder backlog
+- Research ledger
+- Decision log
+- Evidence registry
+- Risk register
+- Role/authority model
+- Knowledge/memory model
+- Public transparency model
 
-- simulated Pod,
-- product catalog,
-- compliance gate,
-- inventory engine,
-- transaction simulator,
-- dashboard,
-- audit log,
-- product digital twin.
+**Exit:** work can be tracked from question → evidence → decision → action → result → learning.
 
-**Exit condition:** a simulated machine can execute an end-to-end transaction while producing a complete audit trail.
+## Phase 2 — Project #001 Software Simulation
+Build:
+- Product database
+- Compliance/evidence registry
+- Simulated Pod
+- Transaction simulator
+- Inventory engine
+- Audit events
+- Unit economics calculator
+- Founder dashboard
 
----
+## Phase 3 — Adaptive Physical Prototype
+Build the hardware BOM, controller, UX, payment architecture, secure inventory, telemetry, monitoring, and failure-state handling.
 
-## Stage 2 — Physical Prototype
+## Phase 4 — Controlled Pilot Architecture
+Research appropriate partner, venue, product approval workflow, verification, staff/handoff workflow, insurance, incident response, and compliance evidence.
 
-**Goal:** prove the hardware/software interface.
+## Phase 5 — One-Machine Commercial Pilot
+Measure transactions/day, AOV, gross margin, contribution margin, uptime, restock labor, repeat behavior, failed transactions, customer feedback, and compliance events.
 
-- enclosure,
-- controller,
-- touchscreen,
-- payment,
-- lock,
-- inventory sensing,
-- network,
-- telemetry.
+## Phase 6 — Network
+Scale experimentally: **1 → 3 → 10 → 25 → 100**. Each stage must produce new evidence.
 
-**Exit condition:** 7+ days of reliable operation in a controlled environment.
+## Phase 7 — New Reality Platform
+Generalize reusable infrastructure:
+- Organizational memory
+- AI-assisted research
+- Project templates
+- Governance
+- Moderation
+- Evidence
+- Transparency
+- Economics
+- Community participation
+- Interoperability
 
----
+## Evolution Loop
+**Observe → Hypothesize → Simulate → Experiment → Measure → Learn → Update → Document → Reuse**
 
-## Stage 3 — Licensed/Approved Pilot Architecture
+## Stage Gate
+Do not advance because of enthusiasm. Advance because the defined evidence exists.
 
-**Goal:** validate the legal and operational path.
+If evidence is insufficient:
 
-- partner,
-- venue,
-- approved product catalog,
-- customer verification where required,
-- staff workflow,
-- incident response.
-
-**Exit condition:** partner + counsel + regulator-compatible operating architecture documented.
-
----
-
-## Stage 4 — One-Machine Commercial Pilot
-
-Measure:
-
-- transactions/day,
-- average order,
-- gross margin,
-- contribution margin,
-- uptime,
-- restock labor,
-- repeat rate,
-- failed transactions,
-- customer feedback.
-
-**Exit condition:** positive and repeatable unit economics under the actual operating model.
-
----
-
-## Stage 5 — Network
-
-Scale carefully:
-
-```text
-1 Pod
-→ 3 Pods
-→ 10 Pods
-→ 25 Pods
-→ 100 Pods
-```
-
-Do not skip stages simply because capital is available.
-
----
-
-## Stage 6 — Adaptive OS
-
-Become independent of one hardware design.
-
-```text
-Adaptive OS
-   ├── Hardware A
-   ├── Hardware B
-   └── Hardware C
-```
-
-Likewise:
-
-```text
-Adaptive Catalog
-   ├── PA
-   ├── State B
-   ├── State C
-   └── Future jurisdictions
-```
-
----
-
-## Stage 7 — Platform
-
-Potential platform revenue:
-
-- hardware margin,
-- software subscription,
-- transaction infrastructure,
-- analytics,
-- compliance tooling,
-- inventory optimization,
-- enterprise API,
-- venue services.
-
----
-
-# Stage Gates
-
-Never move to the next stage without meeting its exit condition.
-
-This prevents the common startup failure mode:
-
-```text
-idea → hype → spending → complexity → no proof
-```
-
-and replaces it with:
-
-```text
-hypothesis → prototype → evidence → decision → scale
-```
+**PAUSE → RESEARCH → EXPERIMENT → MEASURE**
