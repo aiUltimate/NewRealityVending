@@ -1,13 +1,59 @@
-# Adaptive — Intelligent Wellness Retail Infrastructure
+# New Reality — Human-AI Community Infrastructure
 
-**Working project name:** Adaptive Technologies  
-**Product family:** Adaptive Pod / Adaptive OS / Adaptive Intelligence / Adaptive Formulations  
-**Project stage:** Founder-led pre-MVP  
-**Founder/operator:** First moderator + first worker  
-**Primary launch jurisdiction under study:** Pennsylvania, USA  
+**Project #001:** Adaptive / NewRealityVending  
 **Core principle:** **Permission. Transparency. Trust.**
 
+> **New Reality is a human-AI community infrastructure framework for creating organizations that can learn, govern themselves, remain transparent, protect human agency, and continuously evolve.**
+
+NewRealityVending began as an intelligent physical retail project. It is now the first experimental implementation of a broader organizational architecture. The detailed retail architecture remains below; the new constitutional layer defines the enterprise-level DNA.
+
+## Core Ethos
+
+**Moderation · Love · Evolution · Transparency · Human Agency**
+
+The objective is not to build one perfect company.
+
+**The objective is to build a system capable of repeatedly creating better projects, organizations, products, and institutions.**
+
+## Organizational DNA
+
+Purpose → People → Values → Governance → Moderation → Intelligence → Transparency → Economics → Operations → Feedback → Evolution → Memory → Safety → Interoperability
+
+## Human + AI Operating Loop
+
+Human Intent → AI Research → AI Analysis → AI Simulation → Human Decision → AI Execution → Real World → Data → AI Reflection → Human Governance → Evolution
+
+AI increases organizational intelligence; it does not become sovereign over people.
+
+## Community Loop
+
+Community → Ideas / Capital / Skills / Research / Testing / Local Knowledge → Project → Results → Community → Feedback → Evolution
+
+## Evolution Loop
+
+Observe → Identify → Hypothesize → Simulate → Experiment → Measure → Compare → Decide → Update → Document → Teach the next project
+
+## Fail-Closed Rule
+
+UNKNOWN → PAUSE → RESEARCH → REVIEW → DECIDE
+
+## Project #001
+
+Adaptive / NewRealityVending remains the concrete laboratory for:
+- jurisdiction-aware physical retail
+- compliance-first product infrastructure
+- intelligent hardware
+- AI-assisted operations
+- transparent product evidence
+- crowdfunding a measurable MVP
+- human moderation
+- auditable transactions and economics
+
+See **[New Reality Constitution](docs/NEW-REALITY-CONSTITUTION.md)** for the foundational architecture.
+
 ---
+
+## Legacy / Project-Level Architecture
 
 ## 0. Mission
 
