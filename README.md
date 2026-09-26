@@ -1,3 +1,6 @@
+<img width="1024" height="572" alt="image" src="https://github.com/user-attachments/assets/38cf9447-6d2f-4b5a-809d-1a934b0b7f1e" />
+
+
 # New Reality — Human-AI Community Infrastructure
 
 **Project #001:** Adaptive / NewRealityVending  
