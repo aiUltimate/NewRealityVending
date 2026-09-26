@@ -1,8 +1,8 @@
-const CACHE = "new-reality-dashboard-v1";
+const CACHE = "new-reality-dashboard-v2";
 const CORE = [
-  "/dashboard/index.html",
-  "/dashboard/manifest.json",
-  "/data/company-os.json"
+  "./index.html",
+  "./manifest.json",
+  "../data/company-os.json"
 ];
 
 self.addEventListener("install", event => {
