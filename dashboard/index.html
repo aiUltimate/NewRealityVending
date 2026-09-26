@@ -520,7 +520,7 @@ function render(){
  else generic(v,current);
 }
 
-fetch("/data/company-os.json")
+fetch(new URL("../data/company-os.json", location.href))
  .then(r=>{if(!r.ok)throw new Error("Could not load data/company-os.json");return r.json()})
  .then(d=>{D=d;navBuild();go("overview");registerApp()})
  .catch(e=>{
