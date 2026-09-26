@@ -1,26 +1,511 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>New Reality — Beta Command Center</title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>New Reality — Company OS</title>
 <style>
-:root{--bg:#080812;--p:#111124;--p2:#181832;--line:#303052;--t:#f4f3ff;--m:#9999bb;--a:#987bff;--c:#55e5ff;--g:#5fe18d;--w:#ffc95e;--r:#ff7187}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 70% 0,#30205b,transparent 35%),var(--bg);color:var(--t);font:14px system-ui,sans-serif}.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{border-right:1px solid var(--line);padding:18px;background:#0b0b17;position:sticky;top:0;height:100vh}.logo{font-size:20px;font-weight:800;margin:8px}.logo i{color:var(--c);font-style:normal}.nav{margin-top:22px}.nav button{display:block;width:100%;border:0;background:none;color:var(--m);text-align:left;padding:9px 11px;border-radius:9px;margin:2px 0;cursor:pointer}.nav button:hover,.nav button.on{background:var(--p2);color:white}.main{padding:22px;max-width:1500px;width:100%;margin:auto}.head{display:flex;justify-content:space-between;gap:15px;align-items:start}.head h1{margin:0;font-size:27px}.head p{color:var(--m);margin:5px 0 18px}.btn{border:1px solid var(--line);background:var(--p);color:white;padding:8px 12px;border-radius:8px;cursor:pointer}.grid{display:grid;gap:12px}.kpis{grid-template-columns:repeat(6,1fr)}.card{background:linear-gradient(145deg,#14142a,#0f0f1e);border:1px solid var(--line);border-radius:14px;padding:15px}.k{font-size:11px;color:var(--m)}.n{font-size:24px;font-weight:800;margin-top:5px}.sub{color:var(--g);font-size:11px}.layout{grid-template-columns:1.4fr .8fr;margin-top:12px}.map{min-height:400px;position:relative;overflow:hidden;background:radial-gradient(circle,#29224e,#111124 55%,#0b0b16)}.core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:155px;height:155px;border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle,#7159d8,#25204d);box-shadow:0 0 80px #7b65ff55;border:1px solid #9b88ff}.node{position:absolute;width:150px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#15152bea;cursor:pointer}.node b{display:block}.node small{color:var(--m)}.tl{top:20px;left:20px}.tr{top:20px;right:20px}.bl{bottom:20px;left:20px}.br{bottom:20px;right:20px}.ml{top:44%;left:12px}.mr{top:44%;right:12px}.two{grid-template-columns:1fr 1fr}.modules{grid-template-columns:repeat(3,1fr);margin-top:12px}.module{min-height:120px;cursor:pointer}.module:hover{border-color:#6858ad}.module h3{margin:0 0 6px}.module p{color:var(--m);line-height:1.45;margin:0 0 10px}.pill{display:inline-block;padding:4px 7px;border-radius:20px;background:#272744;color:#d4ceff;font-size:10px}.toolbar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}.toolbar input,.toolbar select{background:#0b0b16;border:1px solid var(--line);color:white;padding:9px;border-radius:8px}.toolbar input{min-width:280px}.row{display:flex;justify-content:space-between;gap:12px;padding:10px;border:1px solid var(--line);border-radius:9px;margin:7px 0}.muted{color:var(--m)}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:11px;color:var(--m)}a{color:var(--c);text-decoration:none}.hidden{display:none}@media(max-width:1000px){.app{grid-template-columns:1fr}.side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}.nav{display:flex;overflow:auto}.kpis{grid-template-columns:repeat(3,1fr)}.layout,.two,.modules{grid-template-columns:1fr}}@media(max-width:600px){.kpis{grid-template-columns:repeat(2,1fr)}.main{padding:13px}}
-</style></head><body><div class="app"><aside class="side"><div class="logo">NEW <i>REALITY</i></div><div class="muted" style="margin:0 8px">Organizational OS · Beta</div><div class="nav" id="nav"></div></aside><main class="main"><div class="head"><div><h1 id="title">Command Center</h1><p id="desc">Unified view of the company, project, evidence, economics and operating system.</p></div><button class="btn" onclick="download()">Export data</button></div><div id="view"></div></main></div>
+:root{
+  --bg:#080810;--panel:#111120;--panel2:#17172b;--panel3:#0d0d19;--line:#292943;
+  --text:#f5f4ff;--muted:#9898b5;--purple:#987bff;--cyan:#59e5ff;--green:#61e294;
+  --amber:#ffc95c;--red:#ff7086;--shadow:0 18px 50px #0005
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 75% -10%,#35225f 0,#0a0a13 32%),var(--bg);color:var(--text);font:14px Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;overflow:auto;background:#0a0a14;border-right:1px solid var(--line);padding:18px 13px}
+.brand{font-size:21px;font-weight:900;padding:7px 9px 2px;letter-spacing:.3px}
+.brand span{color:var(--cyan)}
+.tagline{font-size:11px;color:var(--muted);padding:0 9px 17px}
+.nav-group{margin-top:18px}
+.nav-label{font-size:10px;color:#676785;letter-spacing:1.5px;text-transform:uppercase;padding:0 10px 6px}
+.nav button{display:block;width:100%;border:0;background:transparent;color:var(--muted);text-align:left;padding:9px 10px;border-radius:9px;margin:2px 0}
+.nav button:hover,.nav button.active{background:var(--panel2);color:#fff}
+.sidebar-footer{margin:22px 8px 5px;color:#686884;font-size:10px;line-height:1.5}
+.main{width:100%;max-width:1600px;margin:auto;padding:24px}
+.header{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:18px}
+h1,h2,h3,p{margin-top:0}
+h1{font-size:28px;margin-bottom:5px}
+.header p{color:var(--muted);margin:0;max-width:760px;line-height:1.45}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:9px 12px;border-radius:9px}
+.btn:hover{border-color:#55557c}
+.btn.primary{border:0;background:linear-gradient(135deg,#9072ff,#5944d6)}
+.search{width:min(420px,100%);background:#0c0c17;border:1px solid var(--line);color:white;padding:10px 12px;border-radius:9px}
+.grid{display:grid;gap:12px}
+.kpis{grid-template-columns:repeat(6,1fr)}
+.card{background:linear-gradient(145deg,#141427,#0f0f1d);border:1px solid var(--line);border-radius:14px;padding:15px;box-shadow:0 10px 30px #0002}
+.kpi .label{font-size:11px;color:var(--muted)}
+.kpi .value{font-size:25px;font-weight:850;margin:5px 0}
+.kpi .sub{font-size:11px;color:var(--green)}
+.layout{grid-template-columns:1.45fr .8fr;margin-top:12px}
+.map{min-height:455px;position:relative;overflow:hidden;background:radial-gradient(circle at center,#28204b,#111124 50%,#0b0b15)}
+.core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:175px;height:175px;border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle,#7259db,#25204d);border:1px solid #9a87ff;box-shadow:0 0 90px #8068ff44}
+.core strong{font-size:16px}
+.node{position:absolute;width:165px;padding:11px;background:#151526ee;border:1px solid var(--line);border-radius:11px;cursor:pointer;transition:.15s}
+.node:hover{border-color:#6658a8;transform:translateY(-2px)}
+.node b{display:block;font-size:12px;margin-bottom:3px}
+.node small{color:var(--muted);line-height:1.35}
+.tl{top:22px;left:22px}.tr{top:22px;right:22px}.bl{bottom:22px;left:22px}.br{bottom:22px;right:22px}
+.ml{top:44%;left:14px}.mr{top:44%;right:14px}
+.connector{position:absolute;left:50%;top:50%;width:86%;height:1px;background:#8c78ff33;transform:translate(-50%,-50%)}
+.two{grid-template-columns:1fr 1fr}
+.three{grid-template-columns:repeat(3,1fr)}
+.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.section-title h2{font-size:16px;margin:0}
+.muted{color:var(--muted)}
+.small{font-size:11px}
+.flow{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.flow span{background:#20203a;border:1px solid var(--line);padding:7px 9px;border-radius:9px;font-size:11px}
+.flow i{color:#77779a;font-style:normal}
+.row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:10px;border:1px solid var(--line);background:#0d0d19;border-radius:9px;margin:7px 0}
+.pill{display:inline-block;padding:4px 7px;border-radius:999px;background:#272742;color:#d5d0ff;font-size:10px;white-space:nowrap}
+.good{color:var(--green)}.warn{color:var(--amber)}.bad{color:var(--red)}.cyan{color:var(--cyan)}
+.module-grid{grid-template-columns:repeat(3,1fr)}
+.module{min-height:128px;cursor:pointer}
+.module:hover{border-color:#6255a1;transform:translateY(-1px)}
+.module h3{font-size:14px;margin-bottom:6px}
+.module p{color:var(--muted);font-size:12px;line-height:1.45}
+.progress{height:7px;background:#202034;border-radius:99px;overflow:hidden;margin:8px 0}
+.progress > div{height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan));width:0}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.toolbar .search{flex:1;min-width:240px}
+.select{background:#0c0c17;border:1px solid var(--line);color:white;padding:9px;border-radius:9px}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.7px}
+a{color:var(--cyan);text-decoration:none}
+a:hover{text-decoration:underline}
+.code{background:#090911;border:1px solid var(--line);padding:12px;border-radius:9px;overflow:auto;font:12px ui-monospace,SFMono-Regular,Menlo,monospace;color:#d9d7ed}
+.detail-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.detail h3{font-size:13px;margin-bottom:7px}
+.detail ul{margin:7px 0 0;padding-left:18px;color:var(--muted);line-height:1.6}
+.notice{border-left:3px solid var(--amber);background:#181526;padding:11px 12px;border-radius:7px;color:#ddd9ef}
+.empty{text-align:center;padding:40px;color:var(--muted)}
+.footer{margin-top:20px;color:#62627d;font-size:10px}
+@media(max-width:1100px){.app{grid-template-columns:1fr}.sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line)}.nav{display:flex;overflow:auto;gap:4px}.nav-group{margin-top:10px}.nav-label{display:none}.sidebar-footer{display:none}.kpis{grid-template-columns:repeat(3,1fr)}.layout,.two,.detail-grid{grid-template-columns:1fr}.module-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:650px){.main{padding:14px}.header{display:block}.actions{margin-top:12px}.kpis{grid-template-columns:repeat(2,1fr)}.module-grid,.three{grid-template-columns:1fr}.map{min-height:650px}.node{width:145px}.tl{top:18px;left:12px}.tr{top:18px;right:12px}.bl{bottom:18px;left:12px}.br{bottom:18px;right:12px}.ml{top:43%;left:5px}.mr{top:43%;right:5px}.core{width:145px;height:145px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand">NEW <span>REALITY</span></div>
+  <div class="tagline">Company OS · Project #001 · Adaptive / NewRealityVending</div>
+  <div class="nav" id="nav"></div>
+  <div class="sidebar-footer">
+    Permission. Transparency. Trust.<br>
+    Human authority · AI assistance · evidence · evolution
+  </div>
+</aside>
+
+<main class="main">
+  <header class="header">
+    <div>
+      <h1 id="title">Command Center</h1>
+      <p id="desc">A simple, connected view of the company, project, evidence, economics, operations and evolution loop.</p>
+    </div>
+    <div class="actions">
+      <input class="search" id="globalSearch" placeholder="Search the entire Company OS…" oninput="globalSearch(this.value)">
+      <button class="btn" onclick="downloadData()">Export</button>
+    </div>
+  </header>
+  <section id="view"></section>
+  <div class="footer">Source: aiUltimate/NewRealityVending · company-os.json · extracted 2026-09-26</div>
+</main>
+</div>
+
 <script>
+const REPO="https://github.com/aiUltimate/NewRealityVending/blob/main/";
 let D=null,current="overview";
-const repo="https://github.com/aiUltimate/NewRealityVending/blob/main/";
-const mods={
-overview:["⌂ Command Center","Whole system"],constitution:["◎ Constitution","Purpose, values, human agency"],governance:["◈ Governance","Authority, decisions, moderation"],projects:["◆ Projects","Project portfolio and roadmap"],intelligence:["✦ AI Intelligence","Research, prediction, optimization"],evidence:["◇ Evidence","Knowledge, sources, auditability"],compliance:["◉ Compliance","Rules, status, fail-closed controls"],products:["□ Products","SKU, batch, COA, product twins"],hardware:["▣ Hardware","Pods, devices, telemetry"],operations:["⚙ Operations","Daily/weekly/monthly execution"],economics:["$ Economics","Revenue, contribution, payback"],community:["○ Community","Ideas, capital, skills, feedback"],risk:["△ Risk","Threats, controls, stop conditions"],roadmap:["→ Roadmap","Stages and evidence gates"],data:["▤ Data Model","Entities, events, relationships"],sources:["☷ Repository","Source files and architecture"]};
-fetch("../data/company-os.json").then(r=>r.json()).then(d=>{D=d;buildNav();render()}).catch(e=>document.getElementById("view").innerHTML='<div class="card">Load error: '+e+'</div>');
-function buildNav(){document.getElementById("nav").innerHTML=Object.entries(mods).map(([k,v])=>'<button data-k="'+k+'" onclick="go(\''+k+'\')">'+v[0]+'</button>').join("")}
-function go(k){current=k;document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("on",x.dataset.k===k));document.getElementById("title").textContent=mods[k][0].replace(/^\S+ /,"");document.getElementById("desc").textContent=mods[k][1];render()}
-function card(k,n,s){return '<div class="card"><div class="k">'+k+'</div><div class="n">'+n+'</div><div class="sub">'+s+'</div></div>'}
-function list(a){return '<div>'+a.map(x=>'<div class="row">'+x+'</div>').join("")+'</div>'}
-function render(){let v=document.getElementById("view");if(current==="overview")return overview(v);if(current==="sources")return sources(v);if(current==="data")return data(v);let key={governance:"governance",projects:"roadmap",intelligence:"ai",evidence:"constitution",compliance:"compliance",products:"product_system",hardware:"hardware",operations:"moderator_ops",economics:"economics",risk:"risk",community:"constitution",constitution:"constitution"}[current];generic(v,key)}
-function overview(v){v.innerHTML='<div class="grid kpis">'+card("Modules",Object.keys(mods).length,"connected surfaces")+card("Core entities",D.core_entities.length,"shared data model")+card("Event types",D.event_types.length,"auditable history")+card("Roadmap phases",D.roadmap.length,"evidence gates")+card("Risk categories",Object.keys(D.risk.categories).length,"monitored domains")+card("Source files",D.repository_sources.length,"extracted from repo")+'</div><div class="grid layout"><div class="card map"><div class="core"><div><b>NEW REALITY</b><br><span class="muted">Organizational OS</span></div></div>'+node("tl","Constitution","DNA · values · agency","constitution")+node("tr","Human + AI","Intelligence · decisions","intelligence")+node("bl","Economics","Capital · revenue · reinvestment","economics")+node("br","Execution","Products · Pods · operations","operations")+node("ml","Evidence","Knowledge · memory · audit","evidence")+node("mr","Immune System","Compliance · risk · moderation","compliance")+'</div><div><div class="card"><b>System equation</b>'+list(["Purpose → Design → Project","Evidence → Decision → Action","Capital → Execution → Value","Results → Measurement → Learning","Learning → Memory → Next Project"])+'</div><div class="card" style="margin-top:12px"><b>Critical decision rules</b>'+list(D.decision_rules)+'</div></div></div><div class="grid modules">'+Object.entries(mods).filter(x=>x[0]!=="overview").map(([k,x])=>'<div class="card module" onclick="go(\''+k+'\')"><h3>'+x[0].replace(/^\S+ /,"")+'</h3><p>'+x[1]+'</p><span class="pill">open module</span></div>').join("")+'</div>'}
-function node(c,a,b,k){return '<div class="node '+c+'" onclick="go(\''+k+'\')"><b>'+a+'</b><small>'+b+'</small></div>'}
-function generic(v,key){let o=D[key];let title=mods[current][0].replace(/^\S+ /,"");let html='<div class="card"><h2>'+title+'</h2><p class="muted">Structured from the repository. This surface is a view over the shared company data model, not a separate database.</p>';html+=obj(o);html+='</div>';v.innerHTML=html}
-function obj(o){if(Array.isArray(o))return list(o.map(x=>typeof x==="object"?obj(x):String(x)));if(o&&typeof o==="object")return Object.entries(o).map(([k,v])=>'<div style="margin:15px 0"><b>'+k.replaceAll("_"," ")+'</b>'+obj(v)+'</div>').join("");return '<div class="muted" style="margin-top:6px">'+String(o)+'</div>'}
-function data(v){v.innerHTML='<div class="grid two"><div class="card"><h2>Entities</h2>'+list(D.core_entities)+'</div><div class="card"><h2>Event stream</h2>'+list(D.event_types)+'</div></div><div class="card" style="margin-top:12px"><h2>Relationship graph</h2>'+list(D.data_model.relationships)+'</div><div class="card" style="margin-top:12px"><h2>Connector strategy</h2>'+list(D.data_model.connector_strategy)+'</div>'}
-function sources(v){v.innerHTML='<div class="card"><h2>Repository source catalog</h2><p class="muted">Every listed source was extracted into the unified company model. Open the original document when exact wording or evidence is required.</p><table><thead><tr><th>Source</th><th>Type</th><th>Role</th></tr></thead><tbody>'+D.repository_sources.map(p=>'<tr><td><a href="'+repo+p+'" target="_blank">'+p+'</a></td><td>'+((p.endsWith(".json")?"Schema":p.endsWith(".csv")?"Data":"Document"))+'</td><td>'+role(p)+'</td></tr>').join("")+'</tbody></table></div>'}
-function role(p){if(p.includes("CONSTITUTION"))return"Foundational organizational DNA";if(p.includes("LEGAL"))return"Jurisdiction research baseline";if(p.includes("AI"))return"AI architecture";if(p.includes("COMPLIANCE"))return"Machine-readable compliance";if(p.includes("DATA-ARCH"))return"Data architecture";if(p.includes("PRODUCT"))return"Product digital twin";if(p.includes("HARDWARE"))return"Pod specification";if(p.includes("SOFTWARE"))return"Adaptive OS services";if(p.includes("ECONOMICS"))return"Unit economics";if(p.includes("RISK"))return"Risk register";if(p.includes("VENUE"))return"Pilot architecture";if(p.includes("CROWDFUND"))return"Funding architecture";if(p.includes("MODERATOR"))return"Founder operating system";if(p.includes("schema"))return"Machine-readable schema";if(p.includes("SPENDING"))return"Financial ledger";return"Company/project source"}
-function download(){let b=new Blob([JSON.stringify(D,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="new-reality-company-os.json";a.click();URL.revokeObjectURL(a.href)}
-</script></body></html>
+
+const navGroups=[
+  ["START",[
+    ["overview","⌂ Command Center","Everything at a glance"],
+    ["today","✓ Founder Today","What to review and do"],
+    ["projects","◆ Roadmap","Projects, phases and gates"]
+  ]],
+  ["SYSTEM",[
+    ["constitution","◎ Constitution","Purpose, values and human agency"],
+    ["governance","◈ Governance","Authority, moderation and decisions"],
+    ["intelligence","✦ AI Intelligence","Research, prediction and optimization"],
+    ["evidence","◇ Evidence","Evidence, memory and auditability"],
+    ["compliance","◉ Compliance","Rules, gates and fail-closed controls"]
+  ]],
+  ["BUSINESS",[
+    ["products","□ Products","Product digital twins and batches"],
+    ["hardware","▣ Hardware","Pods, telemetry and device states"],
+    ["operations","⚙ Operations","Daily, weekly and monthly work"],
+    ["economics","$ Economics","Revenue, contribution and payback"],
+    ["community","○ Community","Ideas, capital, skills and feedback"],
+    ["risk","△ Risk","Risks, controls and stop conditions"]
+  ]],
+  ["ARCHITECTURE",[
+    ["data","▤ Data Model","Entities, events and relationships"],
+    ["sources","☷ Repository","Source files and documentation"]
+  ]]
+];
+
+function esc(x){
+  return String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+function arr(x){return Array.isArray(x)?x:[]}
+function navBuild(){
+  document.getElementById("nav").innerHTML=navGroups.map(g=>
+    '<div class="nav-group"><div class="nav-label">'+g[0]+'</div>'+
+    g[1].map(([k,a,b])=>'<button data-k="'+k+'" onclick="go(\''+k+'\')">'+a+'</button>').join("")+
+    '</div>').join("");
+}
+function go(k){
+  current=k;
+  document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.k===k));
+  const item=navGroups.flatMap(g=>g[1]).find(x=>x[0]===k);
+  document.getElementById("title").textContent=item?item[1].replace(/^\S+ /,""):"Command Center";
+  document.getElementById("desc").textContent=item?item[2]:"";
+  render();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function card(label,value,sub,cls=""){
+  return '<div class="card kpi"><div class="label">'+esc(label)+'</div><div class="value '+cls+'">'+esc(value)+'</div><div class="sub">'+esc(sub)+'</div></div>';
+}
+function list(items){
+  return '<div>'+arr(items).map(x=>'<div class="row">'+(typeof x==="string"?esc(x):objInline(x))+'</div>').join("")+'</div>';
+}
+function objInline(o){
+  if(!o||typeof o!=="object") return esc(o);
+  return '<div><b>'+esc(Object.keys(o)[0]||"")+'</b> '+esc(Object.values(o)[0]??"")+'</div>';
+}
+function flow(items){
+  return '<div class="flow">'+arr(items).map((x,i)=>'<span>'+esc(x)+'</span>'+(i<items.length-1?'<i>→</i>':'')).join("")+'</div>';
+}
+function countRisk(){return D&&D.risk?Object.values(D.risk.categories).flat().length:0}
+function roadmapDone(){
+  const r=arr(D.roadmap); return r.length?Math.round((r.filter(x=>x.state==="complete").length/r.length)*100):0;
+}
+
+function overview(v){
+  const progress=roadmapDone();
+  v.innerHTML=
+  '<div class="grid kpis">'+
+  card("System modules","15","connected surfaces")+
+  card("Core entities",D.core_entities.length,"shared data model")+
+  card("Event types",D.event_types.length,"auditable history")+
+  card("Roadmap phases",D.roadmap.length,"evidence gates")+
+  card("Risk items",countRisk(),"monitored domains")+
+  card("Source files",D.repository_sources.length,"repository knowledge")+
+  '</div>'+
+  '<div class="grid layout">'+
+    '<div class="card map">'+
+      '<div class="connector"></div>'+
+      '<div class="core"><div><strong>NEW REALITY</strong><br><span class="muted">Organizational OS</span><br><span class="small cyan">Project #001</span></div></div>'+
+      node("tl","Constitution","DNA · values · agency","constitution")+
+      node("tr","Human + AI","Intelligence · decisions","intelligence")+
+      node("bl","Economics","Capital · revenue · reinvestment","economics")+
+      node("br","Execution","Products · Pods · operations","operations")+
+      node("ml","Evidence","Knowledge · memory · audit","evidence")+
+      node("mr","Immune System","Compliance · risk · moderation","compliance")+
+    '</div>'+
+    '<div class="grid">'+
+      '<div class="card"><div class="section-title"><h2>How the system works</h2><span class="pill">one connected loop</span></div>'+
+        flow(["Purpose","Design","Project","Evidence","Decision","Action","Outcome","Learning","Memory"])+
+      '</div>'+
+      '<div class="card"><div class="section-title"><h2>Human + AI loop</h2><span class="pill">human authority</span></div>'+
+        flow(D.constitution.human_ai_loop)+
+      '</div>'+
+      '<div class="card"><div class="section-title"><h2>North Star</h2></div><div class="notice">'+esc(D.constitution.north_star)+'</div></div>'+
+    '</div>'+
+  '</div>'+
+  '<div class="grid two" style="margin-top:12px">'+
+    '<div class="card"><div class="section-title"><h2>Current business model</h2><span class="pill">Project #001</span></div>'+
+      '<div class="grid three">'+
+        mini("Hardware","Adaptive Pod","sale · lease · revenue share · managed service")+
+        mini("Software","Adaptive OS","subscription · per-machine · transaction · license")+
+        mini("Intelligence","Adaptive Intelligence","forecasting · compliance · analytics · optimization")+
+      '</div>'+
+      '<div class="row" style="margin-top:10px"><b>Starting model</b><span class="pill">'+esc(D.business.starting_model.join(" + "))+'</span></div>'+
+    '</div>'+
+    '<div class="card"><div class="section-title"><h2>Stage gate</h2><span class="pill">'+progress+'% complete phases</span></div>'+
+      '<div class="progress"><div style="width:'+progress+'%"></div></div>'+
+      '<div class="muted small">Scale only when evidence exists. The immediate objective is a measurable, controlled MVP—not premature network scale.</div>'+
+      '<div class="row"><b>Primary scaling metric</b><span class="good">Contribution / machine / day</span></div>'+
+      '<div class="row"><b>Decision rule</b><span class="muted">Observed Contribution &gt; Required Return Threshold</span></div>'+
+    '</div>'+
+  '</div>'+
+  '<div class="card" style="margin-top:12px"><div class="section-title"><h2>Open the system</h2><span class="muted small">Each card is a live view over the shared data model</span></div>'+
+    '<div class="grid module-grid">'+moduleCards()+'</div>'+
+  '</div>';
+}
+function node(cls,title,sub,key){
+  return '<div class="node '+cls+'" onclick="go(\''+key+'\')"><b>'+esc(title)+'</b><small>'+esc(sub)+'</small></div>';
+}
+function mini(a,b,c){
+  return '<div class="card" style="background:#0d0d19"><div class="muted small">'+esc(a)+'</div><b>'+esc(b)+'</b><div class="muted small" style="margin-top:5px">'+esc(c)+'</div></div>';
+}
+function moduleCards(){
+  const items=[
+    ["constitution","Constitution","Purpose, values, human agency and evolution"],
+    ["governance","Governance","Authority, moderation, decision records and amendments"],
+    ["intelligence","AI Intelligence","Retrieval → extraction → classification → prediction → optimization"],
+    ["evidence","Evidence","Facts, sources, interpretations, hypotheses and audit trails"],
+    ["compliance","Compliance","SKU × jurisdiction × current rules × evidence"],
+    ["products","Products","Digital twins, COAs, batches, economics and feedback"],
+    ["hardware","Hardware","Pod workflow, telemetry, security and failsafes"],
+    ["operations","Operations","Founder queue, cadence and automation opportunities"],
+    ["economics","Economics","Revenue, gross profit, contribution and payback"],
+    ["community","Community","Ideas, capital, skills, research, testing and feedback"],
+    ["risk","Risk","Regulatory, business, technology, operations and reputation"],
+    ["projects","Roadmap","Phase 0 → Phase 7 with evidence gates"],
+    ["data","Data Model","Entities, events, identity domains and connectors"],
+    ["sources","Repository","The documents and schemas that define the system"]
+  ];
+  return items.map(x=>'<div class="card module" onclick="go(\''+x[0]+'\')"><h3>'+esc(x[1])+'</h3><p>'+esc(x[2])+'</p><span class="pill">open module</span></div>').join("");
+}
+
+function today(v){
+  const daily=D.moderator_ops.daily,weekly=D.moderator_ops.weekly,monthly=D.moderator_ops.monthly;
+  v.innerHTML=
+  '<div class="grid two">'+
+    '<div class="card"><div class="section-title"><h2>Daily control panel</h2><span class="pill">Founder / Moderator</span></div>'+list(daily.map(x=>"Review "+x))+'</div>'+
+    '<div class="card"><div class="section-title"><h2>Priority order</h2><span class="pill">one-person mode</span></div>'+flow(D.moderator_ops.one_person_order)+'</div>'+
+  '</div>'+
+  '<div class="grid two" style="margin-top:12px">'+
+    '<div class="card"><div class="section-title"><h2>Weekly review</h2></div>'+list(weekly)+'</div>'+
+    '<div class="card"><div class="section-title"><h2>Monthly review</h2></div>'+list(monthly)+'</div>'+
+  '</div>'+
+  '<div class="grid two" style="margin-top:12px">'+
+    '<div class="card"><h2 style="font-size:16px">Moderation queue</h2>'+flow(D.moderator_ops.queue)+'</div>'+
+    '<div class="card"><h2 style="font-size:16px">Founder systems rule</h2><div class="notice">'+esc(D.moderator_ops.automation_rule)+'</div></div>'+
+  '</div>';
+}
+
+function roadmap(v){
+  const phases=arr(D.roadmap);
+  v.innerHTML='<div class="card"><div class="section-title"><h2>New Reality roadmap</h2><span class="pill">evidence-gated</span></div>'+
+    '<p class="muted">The sequence moves from constitutional architecture → organizational OS → simulation → physical prototype → controlled pilot → measured commercial pilot → network → reusable New Reality infrastructure.</p>'+
+    phases.map(p=>{
+      const state=p.state||"planned";
+      const cls=state==="complete"?"good":state==="partially complete"?"warn":"";
+      return '<div class="row"><div style="flex:1"><b>Phase '+esc(p.phase)+' · '+esc(p.name)+'</b><div class="muted small" style="margin-top:5px">'+esc(state)+'</div>'+
+      '<div class="progress"><div style="width:'+(state==="complete"?100:state==="partially complete"?45:8)+'%"></div></div>'+
+      '<div class="muted small">'+arr(p.outputs).map(esc).join(" · ")+'</div></div><span class="pill '+cls+'">'+esc(state)+'</span></div>';
+    }).join("")+
+    '<div class="notice" style="margin-top:12px"><b>Stage gate:</b> Do not advance because of enthusiasm. Advance because the defined evidence exists. If evidence is insufficient: PAUSE → RESEARCH → EXPERIMENT → MEASURE.</div>'+
+  '</div>';
+}
+
+function generic(v,key){
+  const map={constitution:D.constitution,governance:D.governance,intelligence:D.ai,evidence:D.constitution,compliance:D.compliance,products:D.product_system,hardware:D.hardware,operations:D.moderator_ops,economics:D.economics,community:D.constitution,risk:D.risk};
+  const o=map[key];
+  let extra="";
+  if(key==="constitution") extra=constitutionView();
+  else if(key==="governance") extra=governanceView();
+  else if(key==="intelligence") extra=aiView();
+  else if(key==="evidence") extra=evidenceView();
+  else if(key==="compliance") extra=complianceView();
+  else if(key==="products") extra=productView();
+  else if(key==="hardware") extra=hardwareView();
+  else if(key==="operations") extra=operationsView();
+  else if(key==="economics") extra=economicsView();
+  else if(key==="community") extra=communityView();
+  else if(key==="risk") extra=riskView();
+  v.innerHTML=extra||('<div class="card">'+pretty(o)+'</div>');
+}
+
+function box(title,body){
+  return '<div class="card detail"><h3>'+esc(title)+'</h3>'+body+'</div>';
+}
+function bullets(a){return '<ul>'+arr(a).map(x=>'<li>'+esc(x)+'</li>').join("")+'</ul>'}
+function constitutionView(){
+ return '<div class="grid two">'+
+ box("Core ethos",bullets(D.constitution.ethos))+
+ box("Organizational DNA",flow(D.constitution.dna))+
+ box("Living organization",Object.entries(D.constitution.living_organization).map(([k,v])=>'<div class="row"><b>'+esc(k)+'</b><span class="muted">'+esc(v)+'</span></div>').join(""))+
+ box("Community loop",flow(D.constitution.community_loop))+
+ box("Evolution loop",flow(D.constitution.evolution_loop))+
+ box("Safety loop",flow(D.constitution.safety_loop))+
+ '</div>';
+}
+function governanceView(){
+ return '<div class="grid two">'+
+ box("Authority stack",flow(D.governance.layers))+
+ box("Human authority",bullets(D.governance.human_authority))+
+ box("AI is allowed to",bullets(D.governance.ai_allowed))+
+ box("AI is prohibited from",bullets(D.governance.ai_prohibited))+
+ box("Decision record",flow(D.governance.decision_record))+
+ box("Constitutional amendment",flow(D.governance.amendment))+
+ box("Founder phase",'<div class="notice">'+esc(D.governance.founder_phase)+'</div>')+
+ box("Future functions",bullets(D.governance.future_functions))+
+ '</div>';
+}
+function aiView(){
+ return '<div class="card"><div class="section-title"><h2>'+esc(D.ai.principle)+'</h2><span class="pill">optimization, not authority</span></div>'+flow(D.ai.stack)+'</div>'+
+ '<div class="grid two" style="margin-top:12px">'+
+ box("Predictions",bullets(D.ai.predictions))+box("Recommendations",bullets(D.ai.recommendations))+
+ box("Evidence trace",flow(D.ai.evidence_trace))+box("Hallucination defense",flow(D.ai.defense))+
+ '</div>';
+}
+function evidenceView(){
+ return '<div class="grid two">'+
+ box("Keep these distinct",bullets(["Verified fact","Source material","Expert interpretation","AI inference","Community report","Hypothesis","Prediction","Decision"]))+
+ box("Decision evidence chain",flow(D.governance.decision_record))+
+ box("Long-term memory",'<div class="muted">The New Reality Knowledge Graph should preserve knowledge, decisions, experiments, failures, successful patterns, research, legal findings, technical solutions, supplier information, economic models, community feedback and operating procedures.</div>')+
+ box("Audit principle",'<div class="notice">Important actions should preserve WHO · WHAT · WHEN · WHY · OBJECT · PREVIOUS STATE · NEW STATE · EVIDENCE.</div>')+
+ '</div>';
+}
+function complianceView(){
+ return '<div class="card"><div class="section-title"><h2>Compliance pipeline</h2><span class="pill">fail closed</span></div>'+flow(D.compliance.pipeline)+'</div>'+
+ '<div class="grid two" style="margin-top:12px">'+
+ box("Decision statuses",bullets(D.compliance.statuses.map(x=>x+" — "+(x==="UNKNOWN"?"not approval":"machine-readable state"))))+
+ box("Version every decision",bullets(D.compliance.version_fields))+
+ box("Priority queue",bullets(D.compliance.priority))+
+ box("Change event",'<div class="row"><b>'+esc(D.compliance.change_event)+'</b><span class="pill">trigger re-review</span></div>')+
+ '</div>'+
+ '<div class="notice" style="margin-top:12px"><b>Fail-closed rule:</b> No evidence → UNKNOWN. UNKNOWN is not approval.</div>';
+}
+function productView(){
+ return '<div class="card"><div class="section-title"><h2>Product digital twin</h2><span class="pill">SKU-level identity</span></div>'+flow(D.product_system.digital_twin)+'</div>'+
+ '<div class="grid two" style="margin-top:12px">'+
+ box("Customer objectives",bullets(D.product_system.objectives))+
+ box("Formulation intelligence",flow(D.product_system.formula_flow))+
+ box("Private-label path",flow(D.product_system.private_label_path))+
+ box("Traceability",flow(D.product_system.traceability))+
+ box("Critical separation",'<div class="notice">'+esc(D.product_system.separation)+'</div>')+
+ '</div>';
+}
+function hardwareView(){
+ return '<div class="grid two">'+
+ box("Adaptive Pod requirements",bullets(D.hardware.requirements))+
+ box("Device state machine",flow(D.hardware.state_machine))+
+ box("Error states",bullets(D.hardware.error_states))+
+ box("Failsafe",'<div class="notice">'+esc(D.hardware.failsafe)+'</div>')+
+ '</div><div class="card" style="margin-top:12px"><b>MVP rule:</b> <span class="muted">'+esc(D.hardware.mvp_rule)+'</span></div>';
+}
+function operationsView(){
+ return '<div class="grid three">'+box("Daily",bullets(D.moderator_ops.daily))+box("Weekly",bullets(D.moderator_ops.weekly))+box("Monthly",bullets(D.moderator_ops.monthly))+'</div>'+
+ '<div class="grid two" style="margin-top:12px">'+box("Moderation queue",flow(D.moderator_ops.queue))+box("Prioritization",'<div class="code">'+esc(D.moderator_ops.priority)+'</div>')+'</div>';
+}
+function economicsView(){
+ const e=D.economics;
+ return '<div class="grid three">'+
+ box("Variables",bullets(e.variables))+
+ box("Primary metric",'<div style="font-size:20px;font-weight:800" class="cyan">'+esc(e.primary_metric)+'</div>')+
+ box("Scaling rule",'<div class="notice">'+esc(D.business.scaling_rule)+'</div>')+
+ '</div>'+
+ '<div class="grid two" style="margin-top:12px">'+
+ box("Equations",'<div class="code">'+Object.entries(e.equations).map(([k,v])=>esc(k)+" = "+esc(v)).join("\n")+'</div>')+
+ box("Scenarios",bullets(e.scenarios.map(x=>x+" scenario")))+
+ '</div>';
+}
+function communityView(){
+ return '<div class="grid two">'+
+ box("Community loop",flow(D.constitution.community_loop))+
+ box("Community role",'<div class="notice">The community is a participant, not merely a funding source.</div>')+
+ box("Participation inputs",bullets(["Ideas","Capital","Skills","Research","Testing","Local knowledge"]))+
+ box("Output",flow(["Project","Results","Feedback","Evolution"]))+
+ '</div>';
+}
+function riskView(){
+ const cats=D.risk.categories;
+ return '<div class="grid three">'+Object.entries(cats).map(([k,v])=>box(k,bullets(v))).join("")+'</div>'+
+ '<div class="grid two" style="margin-top:12px">'+
+ box("Scoring",'<div class="code">'+esc(D.risk.score)+'\n'+esc(D.risk.scale)+'</div>')+
+ box("Responses",flow(D.risk.responses))+
+ '</div>';
+}
+
+function pretty(o){
+ if(o===null||o===undefined)return "";
+ if(Array.isArray(o))return bullets(o.map(x=>typeof x==="object"?JSON.stringify(x):x));
+ if(typeof o==="object")return Object.entries(o).map(([k,v])=>'<div style="margin:14px 0"><b>'+esc(k.replaceAll("_"," "))+'</b><div class="muted" style="margin-top:5px">'+pretty(v)+'</div></div>').join("");
+ return esc(o);
+}
+
+function dataView(v){
+ v.innerHTML='<div class="grid two">'+
+ box("Core entities",bullets(D.core_entities))+
+ box("Identity domains",flow(D.identity_domains))+
+ box("Event types",bullets(D.event_types))+
+ box("Relationship graph",flow(D.data_model.relationships))+
+ '</div>'+
+ '<div class="grid two" style="margin-top:12px">'+
+ box("Storage strategy",'<div class="notice">'+esc(D.data_model.storage_strategy)+'</div>')+
+ box("Connector strategy",bullets(D.data_model.connector_strategy))+
+ '</div>';
+}
+
+function sourceRole(p){
+ if(p.includes("CONSTITUTION"))return"Foundational organizational DNA";
+ if(p.includes("LEGAL"))return"Pennsylvania legal research baseline";
+ if(p.includes("AI"))return"AI architecture";
+ if(p.includes("COMPLIANCE"))return"Compliance engine";
+ if(p.includes("DATA-ARCH"))return"Data architecture";
+ if(p.includes("PRODUCT"))return"Product system";
+ if(p.includes("HARDWARE"))return"Pod hardware";
+ if(p.includes("SOFTWARE"))return"Adaptive OS";
+ if(p.includes("ECONOMICS"))return"Unit economics";
+ if(p.includes("RISK"))return"Risk register";
+ if(p.includes("VENUE"))return"Pilot architecture";
+ if(p.includes("CROWDFUND"))return"Funding architecture";
+ if(p.includes("MODERATOR"))return"Founder operating system";
+ if(p.includes("schema"))return"Machine-readable schema";
+ if(p.includes("SPENDING"))return"Financial ledger";
+ return"Company/project source";
+}
+function sourcesView(v){
+ v.innerHTML='<div class="card"><div class="section-title"><h2>Repository source catalog</h2><span class="pill">'+D.repository_sources.length+' sources</span></div>'+
+ '<div class="toolbar"><input class="search" id="sourceSearch" placeholder="Filter repository sources…" oninput="filterSources(this.value)"></div>'+
+ '<table><thead><tr><th>Source</th><th>Role</th><th>Open</th></tr></thead><tbody id="sourceRows">'+sourceRows(D.repository_sources)+'</tbody></table></div>';
+}
+function sourceRows(a){
+ return a.map(p=>'<tr><td><b>'+esc(p)+'</b></td><td class="muted">'+esc(sourceRole(p))+'</td><td><a href="'+REPO+p+'" target="_blank">GitHub ↗</a></td></tr>').join("");
+}
+function filterSources(q){
+ const a=D.repository_sources.filter(x=>x.toLowerCase().includes(q.toLowerCase()));
+ document.getElementById("sourceRows").innerHTML=sourceRows(a)||'<tr><td colspan="3" class="empty">No matching sources.</td></tr>';
+}
+
+function globalSearch(q){
+ if(!q){if(current==="overview")render();return}
+ const needle=q.toLowerCase();
+ const hits=[];
+ const scan=(o,path="")=>{
+   if(o===null||o===undefined)return;
+   if(typeof o==="string"){if(o.toLowerCase().includes(needle))hits.push([path,o]);return}
+   if(Array.isArray(o)){o.forEach((x,i)=>scan(x,path+"["+i+"]"));return}
+   if(typeof o==="object")Object.entries(o).forEach(([k,v])=>scan(v,path?path+" → "+k:k));
+ };
+ scan(D);
+ document.getElementById("title").textContent="Search";
+ document.getElementById("desc").textContent=hits.length+" matching knowledge items across the Company OS.";
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+ document.getElementById("view").innerHTML='<div class="card"><div class="section-title"><h2>Search results</h2><span class="pill">'+hits.length+'</span></div>'+
+   (hits.slice(0,100).map(h=>'<div class="row"><div><b>'+esc(h[0])+'</b><div class="muted small">'+esc(h[1])+'</div></div></div>').join("")||'<div class="empty">No matches.</div>')+'</div>';
+}
+
+function downloadData(){
+ const b=new Blob([JSON.stringify(D,null,2)],{type:"application/json"});
+ const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="new-reality-company-os.json";a.click();URL.revokeObjectURL(a.href);
+}
+
+function render(){
+ const v=document.getElementById("view");
+ if(current==="overview")overview(v);
+ else if(current==="today")today(v);
+ else if(current==="projects")roadmap(v);
+ else if(current==="data")dataView(v);
+ else if(current==="sources")sourcesView(v);
+ else generic(v,current);
+}
+
+fetch("../data/company-os.json")
+ .then(r=>{if(!r.ok)throw new Error("Could not load data/company-os.json");return r.json()})
+ .then(d=>{D=d;navBuild();go("overview")})
+ .catch(e=>{
+   document.getElementById("view").innerHTML='<div class="card"><h2>Data could not be loaded</h2><p class="muted">'+esc(e.message)+'</p><p class="muted small">This dashboard expects to run from the repository dashboard/ directory so it can read ../data/company-os.json.</p></div>';
+ });
+</script>
+</body>
+</html>
