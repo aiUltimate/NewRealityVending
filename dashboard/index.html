@@ -109,6 +109,7 @@ a:hover{text-decoration:underline}
       <p id="desc">A simple, connected view of the company, project, evidence, economics, operations and evolution loop.</p>
     </div>
     <div class="actions">
+      <button class="btn" onclick="toggleFullscreen()">Fullscreen</button>
       <input class="search" id="globalSearch" placeholder="Search the entire Company OS…" oninput="globalSearch(this.value)">
       <button class="btn" onclick="downloadData()">Export</button>
     </div>
@@ -485,6 +486,11 @@ function globalSearch(q){
    (hits.slice(0,100).map(h=>'<div class="row"><div><b>'+esc(h[0])+'</b><div class="muted small">'+esc(h[1])+'</div></div></div>').join("")||'<div class="empty">No matches.</div>')+'</div>';
 }
 
+function toggleFullscreen(){
+ const el=document.documentElement;
+ if(!document.fullscreenElement){el.requestFullscreen?.()}else{document.exitFullscreen?.()}
+}
+
 function downloadData(){
  const b=new Blob([JSON.stringify(D,null,2)],{type:"application/json"});
  const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="new-reality-company-os.json";a.click();URL.revokeObjectURL(a.href);
@@ -504,7 +510,7 @@ fetch("../data/company-os.json")
  .then(r=>{if(!r.ok)throw new Error("Could not load data/company-os.json");return r.json()})
  .then(d=>{D=d;navBuild();go("overview")})
  .catch(e=>{
-   document.getElementById("view").innerHTML='<div class="card"><h2>Data could not be loaded</h2><p class="muted">'+esc(e.message)+'</p><p class="muted small">This dashboard expects to run from the repository dashboard/ directory so it can read ../data/company-os.json.</p></div>';
+   document.getElementById("view").innerHTML='<div class="card"><h2>Data could not be loaded</h2><p class="muted">'+esc(e.message)+'</p><p class="muted small">Run the included Linux launcher (`./run-dashboard.sh`) or start a local server with `python3 server.py`. Opening index.html directly may block JSON loading in some browsers.</p></div>';
  });
 </script>
 </body>
