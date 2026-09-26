@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-09-26 — Beta Command Center
+
+Added the first unified New Reality company operating surface:
+
+- `dashboard/index.html` — interactive modular command center.
+- `data/company-os.json` — extracted, structured company/project data contract.
+- README documentation connecting the dashboard to the repository architecture.
+
+The dashboard organizes constitutional, governance, project, AI, evidence, compliance, product, hardware, operations, economic, community, risk, roadmap, and data-model information under one modular interface.
+
 ## 2026-09-24 — Initial architecture package
 
 Created:
