@@ -1435,3 +1435,42 @@ adaptive-crowdfund-project/
 ```
 
 This repository is intentionally structured so the founder can begin as the **first moderator + first worker** and progressively convert founder labor into software, SOPs, data, and eventually a team.
+
+
+---
+
+# Beta Command Center
+
+The repository now includes a unified, modular company dashboard built from the repository's architecture rather than a separate mock business canvas.
+
+- Dashboard: `dashboard/index.html`
+- Unified company data model: `data/company-os.json`
+- Original source documents remain authoritative for exact wording, legal evidence, and technical detail.
+
+The beta model connects:
+
+**Constitution → Governance → Projects → AI → Evidence → Compliance → Products → Hardware → Operations → Economics → Community → Risk → Roadmap → Data**
+
+The dashboard is intentionally **local-first and connector-ready**. The JSON data contract can later be backed by a database/API/event stream without redesigning the user-facing modules.
+
+## Data Architecture
+
+```text
+Organization
+  ↓
+Project / Module
+  ↓
+Entity
+  ↓
+Event ─────→ Evidence
+  ↓             ↓
+Outcome ←── Decision
+  ↓
+Learning
+  ↓
+Memory
+  ↓
+Next Project
+```
+
+The dashboard should be treated as an operational visualization of the New Reality architecture, not as a replacement for the source documents or professional legal review.
