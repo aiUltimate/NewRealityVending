@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111120">
+<link rel="manifest" href="manifest.json">
 <title>New Reality — Company OS</title>
 <style>
 :root{
@@ -486,6 +488,18 @@ function globalSearch(q){
    (hits.slice(0,100).map(h=>'<div class="row"><div><b>'+esc(h[0])+'</b><div class="muted small">'+esc(h[1])+'</div></div></div>').join("")||'<div class="empty">No matches.</div>')+'</div>';
 }
 
+function registerApp(){
+  if("serviceWorker" in navigator && location.protocol !== "file:"){
+    navigator.serviceWorker.register("sw.js").catch(()=>{});
+  }
+}
+window.addEventListener("keydown",e=>{
+  if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==="k"){
+    e.preventDefault(); document.getElementById("globalSearch").focus();
+  }
+  if(e.key==="Escape") document.getElementById("globalSearch").blur();
+});
+
 function toggleFullscreen(){
  const el=document.documentElement;
  if(!document.fullscreenElement){el.requestFullscreen?.()}else{document.exitFullscreen?.()}
@@ -506,9 +520,9 @@ function render(){
  else generic(v,current);
 }
 
-fetch("../data/company-os.json")
+fetch("/data/company-os.json")
  .then(r=>{if(!r.ok)throw new Error("Could not load data/company-os.json");return r.json()})
- .then(d=>{D=d;navBuild();go("overview")})
+ .then(d=>{D=d;navBuild();go("overview");registerApp()})
  .catch(e=>{
    document.getElementById("view").innerHTML='<div class="card"><h2>Data could not be loaded</h2><p class="muted">'+esc(e.message)+'</p><p class="muted small">Run the included Linux launcher (`./run-dashboard.sh`) or start a local server with `python3 server.py`. Opening index.html directly may block JSON loading in some browsers.</p></div>';
  });
